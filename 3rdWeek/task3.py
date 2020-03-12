@@ -13,5 +13,5 @@ maty = np.mat(y)
 Y = np.array(maty.T)
 print('Y:\n{}'.format(Y))
 
-W = 1 / (np.mat(X).T * np.mat(X)) * np.mat(X).T * np.mat(Y)
+W = (np.mat(X).T * np.mat(X)).I * np.mat(X).T * np.mat(Y)
 print('W:\n{}\nshape of W:\n{}'.format(W, W.shape))
