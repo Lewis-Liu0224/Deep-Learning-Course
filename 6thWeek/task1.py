@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import tensorflow as tf
 import numpy as np
+from sklearn.preprocessing import scale
 
 np.set_printoptions(suppress=True)
 
@@ -23,7 +24,9 @@ def grad(x, y, w, b):
 
 training_epochs = 10
 learning_rate = 0.01
-x_data = tf.linspace(0.0, 1.0, 500)
+x_data1 = tf.linspace(0.0, 500.0, 500)
+x_data = tf.cast(scale(x_data1.numpy()), dtype=tf.float32)
+print(x_data)
 np.random.seed(5)
 y_data = 3.1234 * x_data + 2.98
 w = tf.Variable(1.)
@@ -54,6 +57,13 @@ print("w:", w.numpy())
 print("b:", b.numpy())
 
 
+#通过训练出的模型预测 x=5.79 时 y 的值，并显示根据目标方程显示的 y 值，
+test_x = 5.79
+print("当x=5.79时，预测y值为：{:.4f}".format(w*test_x+b))
+print("当x=5.79时，目标方程的y值为：{:.4f}".format(3.1234 * test_x + 2.98))
+
+# writer = tf.summary.FileWriter("E:\homework\Deep-Learning-Course\log", tf.get_default_graph())
+# writer.close()
 # plt.scatter(x_data,y_data)
 # plt.xlabel("x")
 # plt.ylabel("y")
